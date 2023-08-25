@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.camera.mapper.CameraInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.demo.camera.entity.CameraInfo">
+        <id column="id" property="id" />
+        <result column="brand" property="brand" />
+        <result column="model" property="model" />
+        <result column="issue_time" property="issueTime" />
+        <result column="issue_price" property="issuePrice" />
+        <result column="create_time" property="createTime" />
+        <result column="edit_time" property="editTime" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, brand, model, issue_time, issue_price, create_time, edit_time, type
+    </sql>
+    <select id="selectCameraInfoByCondition" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_cam_info
+        <where>
+            <trim suffixOverrides="and">
+                <if test="id != null and id != ''">
+                    and id = #{id}
+                </if>
+                <if test="brand != null and brand != ''">
+                    and brand like concat('%','/',#{brand,jdbcType=VARCHAR},'%')escape'/'
+                </if>
+                <if test="model != null and model != ''">
+                    and model = #{model,jdbcType=VARCHAR}
+                </if>
+                <if test="issueStartTime != null and issueStartTime != ''">
+                    and issue_time between to_date(#{issueStartTime},'yyyy-MM-dd HH:mm:ss') and to_date(#{issueEndTime},'yyyy-MM-dd HH:mm:ss')
+                </if>
+                <if test="issueMinPrice != null and issueMinPrice != ''">
+                    and issue_price &gt; #{issueMinPrice}
+                </if>
+                <if test="issueMaxPrice != null and issueMaxPrice != ''">
+                    and issue_price &lt; #{issueMinPrice}
+                </if>
+                <if test="type != null and type != ''">
+                    and type = #{type,jdbcType=VARCHAR}
+                </if>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

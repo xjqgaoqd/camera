@@ -1,0 +1,94 @@
+spring:
+#  main.allow-bean-definition-overriding: true
+  application:
+    name: camera-start
+
+# Spring datasource configuration (if using a database)
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_my_note?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  type-aliases-package: com.demo.camera.entity
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+  global-config:
+    db-config:
+      id-type: auto
+
+
+# Spring JPA configuration (if using JPA)
+# spring:
+#   jpa:
+#     hibernate:
+#       ddl-auto: update
+#     show-sql: true
+
+# Spring data source pooling (if using a database)
+# spring:
+#   datasource:
+#     hikari:
+#       maximum-pool-size: 10
+
+# Spring MVC configuration
+# spring:
+#   mvc:
+#     view:
+#       prefix: /WEB-INF/views/
+#       suffix: .jsp
+
+# Spring security configuration (if using Spring Security)
+# spring:
+#   security:
+#     user:
+#       name: user
+#       password: password
+#     oauth2:
+#       client:
+#         registration:
+#           google:
+#             clientId: google-client-id
+#             clientSecret: google-client-secret
+
+# Logging configuration
+# logging:
+#   level:
+#     root: INFO
+#     com.example: DEBUG
+
+# External configuration (such as properties from environment)
+# your-config-property: ${CONFIG_PROPERTY_FROM_ENV}
+
+# Additional custom properties
+# custom:
+#   property: value
+
+# Profile-specific configuration
+# spring:
+#   profiles:
+#     active: dev
+# ---
+# spring:
+#   profiles: dev
+#   datasource:
+#     url: jdbc:h2:mem:devdb
+
+# External configuration files (optional)
+# spring:
+#   config:
+#     location: classpath:/custom-config-folder/
+
+# Server port configuration
+server:
+  port: 8088
+  servlet:
+    context-path: /camera-start
+upload:
+  path: D:/zhuhua/mianshi/imgs
+url:
+  data: zgc1

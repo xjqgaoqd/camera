@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.camera.mapper.CameraUrlMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.demo.camera.entity.CameraUrl">
+        <id column="id" property="id" />
+        <result column="cam_id" property="camId" />
+        <result column="url" property="url" />
+        <result column="use_url" property="useUrl" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, cam_id, url,create_time, use_url
+    </sql>
+    <select id="selectCameraUrlByCondition" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_cam_url
+        <where>
+            <trim suffixOverrides="and">
+                <if test="id != null and id != ''">
+                    and id = #{id}
+                </if>
+                <if test="camId != null and camId != ''">
+                    and cam_id = #{camId}
+                </if>
+                <if test="camIds != null and camIds.size > 0">
+                    and cam_id IN
+                    <foreach collection="camIds" item="camId" open="(" separator="," close=")">
+                        #{camId}
+                    </foreach>
+                </if>
+                <if test="useUrl != null and useUrl != ''">
+                    and use_url = #{useUrl}
+                </if>
+            </trim>
+        </where>
+    </select>
+
+</mapper>
