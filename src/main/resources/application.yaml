@@ -89,6 +89,6 @@ server:
   servlet:
     context-path: /camera-start
 upload:
-  path: D:/zhuhua/mianshi/imgs
+  path: D:/zhuhua/mianshi/camera/camera-ui/public/pic
 url:
   data: zgc1

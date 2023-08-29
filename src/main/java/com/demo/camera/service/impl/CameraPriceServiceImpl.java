@@ -60,16 +60,16 @@ public class CameraPriceServiceImpl extends ServiceImpl<CameraPriceMapper, Camer
             try {
                 String url = camUrl.getUrl();
                 Document document = Jsoup.connect(url).get();
-                Elements priceElements = document.select(".price-type"); // 根据实际网页元素选择器选择价格元素
-                Elements priceElements1 = document.select(".brand-name");
+                Elements priceElements = document.select(camUrl.getCssElement()); // 根据实际网页元素选择器选择价格元素
+//                Elements priceElements1 = document.select();
                 if (!priceElements.isEmpty()) {
                     CameraPrice cameraPrice = new CameraPrice();
                     Element priceElement = priceElements.get(0);
                     String price = priceElement.text();
-                    String supplier = priceElements1.text();
+//                    String supplier = priceElements1.text();
                     cameraPrice.setCamId(camUrl.getCamId());
                     cameraPrice.setPrice(Double.parseDouble(price));
-                    cameraPrice.setSupplier(supplier);
+//                    cameraPrice.setSupplier(supplier);
                     cameraPrice.setAddTime(new Date());
                     cameraPriceMapper.insert(cameraPrice);
                     CameraInfo cameraInfo = cameraInfoMapper.selectById(camUrl.getCamId());

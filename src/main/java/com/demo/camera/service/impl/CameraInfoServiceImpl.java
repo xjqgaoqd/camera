@@ -36,14 +36,14 @@ public class CameraInfoServiceImpl extends ServiceImpl<CameraInfoMapper, CameraI
         PageHelper.startPage(param.getPageIndex(),param.getPageSize());
         List<CameraInfo> pages = cameraInfoMapper.selectCameraInfoByCondition(cameraInfo);
         for (CameraInfo info : pages){
-            CameraImg one = new LambdaQueryChainWrapper<CameraImg>(cameraImgMapper)
+            List<CameraImg> list = new LambdaQueryChainWrapper<CameraImg>(cameraImgMapper)
                     .eq(CameraImg::getCamId, info.getId())
                     .eq(CameraImg::getUsed, "1")
                     .orderByAsc(CameraImg::getId)
-                    .one();
-            if (null != one){
-                one.setFilePath(uploadPath + one.getFilePath());
-                info.setMainImg(one);
+                    .list();
+            if (!list.isEmpty()){
+//                one.setFilePath(one.getFilePath());
+                info.setMainImg(list.get(0));
             }
         }
 //        stdCodeUtils.changeValue(pages);

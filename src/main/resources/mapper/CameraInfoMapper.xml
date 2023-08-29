@@ -12,11 +12,13 @@
         <result column="create_time" property="createTime" />
         <result column="edit_time" property="editTime" />
         <result column="type" property="type" />
+        <result column="content" property="content" />
+        <result column="now_price" property="nowPrice" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, brand, model, issue_time, issue_price, create_time, edit_time, type
+        id, brand, model, issue_time, issue_price, create_time, edit_time, type, content, now_price
     </sql>
     <select id="selectCameraInfoByCondition" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>

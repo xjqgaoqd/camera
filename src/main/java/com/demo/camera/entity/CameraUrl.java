@@ -25,6 +25,8 @@ public class CameraUrl {
     private Date createTime;
     @TableField("use_url")
     private String useUrl;
+    @TableField("css_element")
+    private String cssElement;
 
     @TableField(exist = false)
     private List<Integer> camIds;

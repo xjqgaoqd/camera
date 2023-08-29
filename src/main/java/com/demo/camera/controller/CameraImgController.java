@@ -55,7 +55,7 @@ public class CameraImgController {
             CameraImg cameraImg = new CameraImg();
             cameraImg.setCamId(id);
             cameraImg.setUsed("1");
-            cameraImg.setFilePath(path);
+            cameraImg.setFilePath(filename);
             cameraImgService.save(cameraImg);
             return "File uploaded successfully";
         } catch (IOException e) {

@@ -8,12 +8,13 @@
         <result column="cam_id" property="camId" />
         <result column="url" property="url" />
         <result column="use_url" property="useUrl" />
+        <result column="css_element" property="cssElement" />
         <result column="create_time" property="createTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, cam_id, url,create_time, use_url
+        id, cam_id, url,create_time, use_url, css_element
     </sql>
     <select id="selectCameraUrlByCondition" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
